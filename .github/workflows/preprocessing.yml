@@ -35,22 +35,23 @@ jobs:
       run: |
         python preprocessing/automate_Naufal_Aji_Ferdiansyah.py
         
-    - name: Commit and Push Processed Data
+    - - name: Commit and Push Processed Data
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
         
-        # Tambahkan file hasil preprocessing
+        # Tambahkan file jika ada
         if [ -f "preprocessing/winequality_preprocessing.csv" ]; then
           git add preprocessing/winequality_preprocessing.csv
         fi
         
-        # Cek apakah ada perubahan yang perlu di-commit
+        # Cek apakah ada perubahan
         if ! git diff --quiet --staged; then
           git commit -m "Auto-update processed dataset"
-          # Lakukan pull --rebase lagi untuk memastikan posisi aman sebelum push
+          
+          # Gunakan --force atau rebase yang lebih aman
           git pull --rebase origin main
           git push origin main
         else
-          echo "Tidak ada perubahan dataset untuk di-push."
+          echo "Tidak ada perubahan."
         fi
