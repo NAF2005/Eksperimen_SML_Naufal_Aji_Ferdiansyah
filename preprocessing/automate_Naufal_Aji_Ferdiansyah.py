@@ -60,3 +60,4 @@ if __name__ == "__main__":
             save_data(df_clean, PROCESSED_DATA_PATH)
         else:
             print("❌ KESIMPULAN: File CSV tidak cocok. Silakan samakan nama file di atas dengan 'winequality-red.csv'")
+# Memancing bot github actions agar jalan
