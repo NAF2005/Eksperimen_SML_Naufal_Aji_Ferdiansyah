@@ -11,14 +11,14 @@ on:
 jobs:
   run-preprocessing:
     runs-on: ubuntu-latest
-    permissions: # WAJIB ditambahkan agar robot punya akses tulis
-      contents: write
+    permissions:
+      contents: write 
     
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v3
       with:
-        fetch-depth: 0 # WAJIB agar git pull berfungsi baik
+        fetch-depth: 0 
       
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -39,13 +39,13 @@ jobs:
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
         
-        
+        # 1. Tambahkan file hasil preprocessing
         if [ -f "preprocessing/winequality_preprocessing.csv" ]; then
           git add preprocessing/winequality_preprocessing.csv
         fi
         
-        
+        # 2. PENTING: Ambil perubahan terbaru di GitHub sebelum push
         git pull --rebase origin main
         
-        
+        # 3. Commit dan push hanya jika ada perubahan
         git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update processed dataset" && git push origin main)
