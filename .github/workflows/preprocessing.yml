@@ -50,7 +50,7 @@ jobs:
           fi
 
           if git diff --staged --quiet; then
-            echo "Tidak ada perubahan untuk di-commit."
+            echo "Tidak ada perubahan."
             exit 0
           fi
 
